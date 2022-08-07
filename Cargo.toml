@@ -1,6 +1,6 @@
 [package]
 name = "pytorch-cpuinfo"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 repository = "https://github.com/alexbatashev/pytorch-cpuinfo"
 description = "Rust wrappers for cpuinfo library"

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/alexbatashev/pytorch-cpuinfo/compare/v0.1.0...v0.1.1) (2022-08-07)
+
+
+### Bug Fixes
+
+* native library location on some systems ([#3](https://github.com/alexbatashev/pytorch-cpuinfo/issues/3)) ([fe9b214](https://github.com/alexbatashev/pytorch-cpuinfo/commit/fe9b214b43bdd5b1ba431a3a863db205c3272bc3))
+
 ## 0.1.0 (2022-08-07)
 
 
