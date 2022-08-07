@@ -3,7 +3,13 @@ use once_cell::sync::Lazy;
 use std::marker::PhantomData;
 
 pub struct Cluster {
+    /// Index of the first logical processor in the cluster
     pub id: u32,
+    /// Clock rate (non-Turbo) of the cores in the cluster, in Hz
+    pub frequency: u64,
+    /// Either value of CPUID leaf 1 EAX register on x86 OR value of Main ID Register
+    /// on ARM
+    pub cpuid: u32,
 }
 
 pub struct Package {
@@ -42,7 +48,20 @@ static GLOBAL_SOCKETS: Lazy<Wrapper> = Lazy::new(|| {
             let maybe_cluster = unsafe { cpuinfo_get_cluster(cid).as_ref() };
             match maybe_cluster {
                 Some(c) => {
-                    let cluster = Cluster { id: c.cluster_id };
+                    #[allow(unused_assignments)]
+                    let mut cpuid = 0 as u32;
+                    cfg_if::cfg_if! {
+                        if #[cfg(any(target_arch = "x86", target_arch = "x86_64"))] {
+                            cpuid = c.cpuid;
+                        } else if #[cfg(any(target_arch = "arm", target_arch = "aarch64"))] {
+                            cpuid = c.midr;
+                        }
+                    };
+                    let cluster = Cluster {
+                        id: c.cluster_id,
+                        frequency: c.frequency,
+                        cpuid,
+                    };
 
                     clusters.push(cluster);
                 }
@@ -80,5 +99,14 @@ mod test {
         let packages = get_packages();
         assert!(!packages.is_empty());
         assert!(!packages.first().unwrap().name.is_empty());
+
+        let package = packages.first().unwrap();
+
+        assert!(!package.clusters.is_empty());
+
+        let cluster = package.clusters.first().unwrap();
+
+        assert_ne!(cluster.cpuid, 0);
+        assert_eq!(cluster.frequency, 0);
     }
 }
