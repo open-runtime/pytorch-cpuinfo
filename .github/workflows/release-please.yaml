@@ -7,7 +7,6 @@ on:
 
 jobs:
   release-please:
-    needs: [test]
     if: ${{ github.event == 'push' }}
     runs-on: ubuntu-latest
     steps:
