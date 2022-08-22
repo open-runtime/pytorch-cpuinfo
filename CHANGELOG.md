@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/alexbatashev/pytorch-cpuinfo/compare/v0.1.1...v0.1.2) (2022-08-22)
+
+
+### Bug Fixes
+
+* cross-compile builds for Android ([#5](https://github.com/alexbatashev/pytorch-cpuinfo/issues/5)) ([669b98c](https://github.com/alexbatashev/pytorch-cpuinfo/commit/669b98c13470ce015ecb2607c4008a047d53e72c))
+
 ## [0.1.1](https://github.com/alexbatashev/pytorch-cpuinfo/compare/v0.1.0...v0.1.1) (2022-08-07)
 
 
