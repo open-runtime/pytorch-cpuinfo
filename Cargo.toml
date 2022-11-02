@@ -5,7 +5,7 @@ edition = "2021"
 repository = "https://github.com/open-runtime/pytorch-cpuinfo"
 description = "Rust wrappers for cpuinfo library"
 readme = "README.md"
-#license = "BSD-2-Clause"
+license = "BSD-2-Clause"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
